@@ -1,0 +1,31 @@
+﻿@{
+	ViewData["Title"] = "Search Results";
+}
+
+<div>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th scope="col">
+					Field
+				</th>
+				<th scope="col">
+					Value
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (KeyValuePair<string, string> field in ViewBag.Details.Fields)
+			{
+				<tr>
+					<td>
+						@field.Key
+					</td>
+					<td>
+						@field.Value
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

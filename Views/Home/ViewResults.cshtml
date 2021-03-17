@@ -1,0 +1,58 @@
+﻿@{
+	ViewData["Title"] = "Search Results";
+}
+
+@if (ViewBag.SearchResults.Count > 0)
+{
+	<div>
+		<table class="table">
+			<thead>
+				<tr>
+					@foreach (KeyValuePair<string, string> field in ViewBag.SearchResults[0].Fields)
+					{
+						<th scope="col">
+							@field.Key
+						</th>
+					}
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (SearchResult result in ViewBag.SearchResults)
+				{
+					<tr onclick="clickRow(@result.NPI)" style="cursor: pointer" class="hover-shadow">
+						@foreach (KeyValuePair<string, string> field in result.Fields)
+						{
+							<td>
+								@field.Value
+							</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}
+else
+{
+	<div>No Result</div>
+}
+
+
+<script>
+	function clickRow(npi) {
+		var url = "@Url.Action("ViewDetails", "Home")";
+		url += "?npi=" + npi;
+		window.location.href = url;
+	}
+</script>
+
+<style>
+
+	.hover-shadow:hover {
+		-webkit-box-shadow: 0 8px 17px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+		box-shadow: 0 8px 17px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+		-webkit-transition: all .3s ease-in-out;
+		transition: all .3s ease-in-out;
+	}
+
+</style>

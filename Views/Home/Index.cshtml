@@ -1,0 +1,37 @@
+﻿@model ClinicalSearchService.Models.SearchRequest
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+</div>
+
+<div class="container">
+
+	<form asp-antiforgery="true" asp-action="Index" asp-controller="Home">
+		<div class="validation" asp-validation-summary="ModelOnly"></div>
+		<div class="row mb-3">
+			<label asp-for="SearchString" class="col-form-label"></label>
+			<div class="col-sm-4">
+				<input type="text" asp-for="SearchString" class="form-control" />
+			</div>
+			<span asp-validation-for="SearchString" class="col text-danger"></span>
+		</div>
+		<div class="row mb-3">
+			<label asp-for="SearchFields" class="col-form-label"></label>
+			<div class="col-sm-4">
+				<select asp-for="SearchFields" class="custom-select" size="10">
+					@foreach (string field in ViewBag.AvailableFields)
+					{
+						<option>@field</option>
+					}
+				</select>
+			</div>
+			<span asp-validation-for="SearchFields" class="col text-danger"></span>
+		</div>
+		<div>
+			<input type="submit" value="Search" />
+		</div>
+	</form>
+</div>
